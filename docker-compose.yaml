@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: creditcard
+      POSTGRES_PASSWORD: creditcard
+    ports:
+      - "5432:5432"
