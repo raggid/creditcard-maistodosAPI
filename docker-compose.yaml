@@ -3,8 +3,8 @@ version: '3'
 services:
   database:
     image: postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: creditadmin
       POSTGRES_PASSWORD: adminpass
     ports:
       - "5432:5432"
@@ -16,6 +16,14 @@ services:
       context: creditcard
     ports:
       - "8000:8000"
+    networks:
+      - creditcard-network
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8080:8080
     networks:
       - creditcard-network
 
