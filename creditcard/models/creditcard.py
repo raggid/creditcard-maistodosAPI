@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Date
-from creditcard.config.database import Base
+from db.base_class import Base
 
 
 class CreditCard(Base):
