@@ -4,7 +4,21 @@ services:
   database:
     image: postgres
     environment:
-      POSTGRES_USER: creditcard
-      POSTGRES_PASSWORD: creditcard
+      POSTGRES_USER: creditadmin
+      POSTGRES_PASSWORD: adminpass
     ports:
       - "5432:5432"
+    networks:
+      - creditcard-network
+
+  app:
+    build:
+      context: creditcard
+    ports:
+      - "8000:8000"
+    networks:
+      - creditcard-network
+
+networks:
+  creditcard-network:
+    driver: bridge
