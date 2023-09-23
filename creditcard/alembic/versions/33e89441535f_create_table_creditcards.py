@@ -1,8 +1,8 @@
-"""create creditcard table
+"""create table creditcards
 
-Revision ID: 98f7be517a18
+Revision ID: 33e89441535f
 Revises: 
-Create Date: 2023-09-22 18:56:55.251491
+Create Date: 2023-09-23 13:11:28.030917
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '98f7be517a18'
+revision: str = '33e89441535f'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,7 +24,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('brand', sa.String(), nullable=True),
     sa.Column('holder', sa.String(), nullable=True),
-    sa.Column('number', sa.Integer(), nullable=True),
+    sa.Column('number', sa.String(), nullable=True),
     sa.Column('exp_date', sa.Date(), nullable=True),
     sa.Column('cvv', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
