@@ -8,6 +8,6 @@ class CreditCard(Base):
     id = Column(Integer, primary_key=True)
     brand = Column(String)
     holder = Column(String)
-    number = Column(Integer)
+    number = Column(String)
     exp_date = Column(Date)
     cvv = Column(Integer)
