@@ -1,6 +1,6 @@
-from pydantic import BaseModel, field_validator
-from datetime import datetime
 import calendar
+from datetime import datetime, date
+from pydantic import BaseModel, field_validator
 
 from creditcard import CreditCard
 
@@ -26,12 +26,12 @@ class CreditCardBase(BaseModel):
 
     @field_validator("exp_date")
     def check_date(exp_date: str):
-        date = datetime.strptime(exp_date, "%m/%Y")
-        if (date < datetime.today()):
+        e_date = datetime.strptime(exp_date, "%m/%Y")
+        if (e_date < datetime.today()):
             raise ValueError("The given date must be greater than today")
-        last_day = calendar.monthrange(date.year, date.month)[1]
-        date = date.replace(day=last_day)
-        return date
+        last_day = calendar.monthrange(e_date.year, e_date.month)[1]
+        e_date = e_date.replace(day=last_day)
+        return e_date
 
     @field_validator("cvv")
     def check_cvv_lenght(cvv: int):
@@ -40,9 +40,13 @@ class CreditCardBase(BaseModel):
         return cvv
 
 
-class CreditCardDB(CreditCardBase):
+class CreditCardDB(BaseModel):
     id: int
     brand: str
+    holder: str
+    number: str
+    cvv: int | None
+    exp_date: date
 
     class Config:
         orm_mode = True
