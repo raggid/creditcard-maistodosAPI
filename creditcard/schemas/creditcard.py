@@ -16,7 +16,7 @@ class CreditCardBase(BaseModel):
         if len(holder) <= 2:
             raise ValueError("Holder must have more than 2 characters")
         return holder
-  
+
     @field_validator("number")
     def check_card_number(number: str):
         cc = CreditCard(number)
