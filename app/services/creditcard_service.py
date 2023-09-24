@@ -1,10 +1,9 @@
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
-from creditcard import CreditCard
-from creditcard.exceptions import BrandNotFound
 
 import models
 from schemas.creditcard import CreditCardBase
+from services.external_card_service import external_cc_service
 
 
 class CreditcardService():
@@ -15,18 +14,10 @@ class CreditcardService():
     def get_creditcard_by_id(self, db: Session, id: int):
         return db.query(models.CreditCard).filter(models.CreditCard.id == id).first()
 
-    def _get_card_brand(self, number: str):
-        cc = CreditCard(number)
-        try:
-            return cc.get_brand()
-        except BrandNotFound:
-            raise HTTPException(status_code=404,
-                                detail="Brand not found for given card number")
-
     def create_creditcard(self, db: Session, data: CreditCardBase):
-
+        external_cc_service.validate_number(data.number)
         creditcard = models.CreditCard(**data.model_dump())
-        creditcard.brand = self._get_card_brand(data.number)
+        creditcard.brand = external_cc_service.get_brand(data.number)
         db.add(creditcard)
         db.commit()
         db.refresh(creditcard)

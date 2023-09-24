@@ -2,8 +2,6 @@ import calendar
 from datetime import datetime, date
 from pydantic import BaseModel, field_validator, ConfigDict
 
-from creditcard import CreditCard
-
 
 class CreditCardBase(BaseModel):
     holder: str
@@ -16,13 +14,6 @@ class CreditCardBase(BaseModel):
         if len(holder) <= 2:
             raise ValueError("Holder must have more than 2 characters")
         return holder
-
-    @field_validator("number")
-    def check_card_number(number: str):
-        cc = CreditCard(number)
-        if not cc.is_valid():
-            raise ValueError("Invalid card number")
-        return number
 
     @field_validator("exp_date")
     def check_date(exp_date: str):
