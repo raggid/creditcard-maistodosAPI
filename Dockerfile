@@ -18,4 +18,4 @@ RUN pip install git+https://github.com/maistodos/python-creditcard.git@main
 COPY app .
 ENV PYTHONPATH=/app
 
-CMD [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000" ] 
+CMD [ "sh", "prestart.sh" ] 

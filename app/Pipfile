@@ -14,6 +14,7 @@ python-jose = {version = "*", extras = ["cryptography"]}
 passlib = {version = "*", extras = ["bcrypt"]}
 pydantic = {version = "*", extras = ["email"]}
 pydantic-settings = "*"
+tenacity = "*"
 
 [dev-packages]
 
