@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 class UserBase(BaseModel):
@@ -13,10 +13,8 @@ class UserCreate(UserBase):
 
 
 class UserInDBBase(UserBase):
+    model_config = ConfigDict(from_attributes=True)
     id: Optional[int] = None
-
-    class Config:
-        orm_mode = True
 
 
 class UserInDB(UserInDBBase):

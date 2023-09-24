@@ -1,6 +1,6 @@
 import calendar
 from datetime import datetime, date
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, field_validator, ConfigDict
 
 from creditcard import CreditCard
 
@@ -41,12 +41,11 @@ class CreditCardBase(BaseModel):
 
 
 class CreditCardDB(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     brand: str
     holder: str
     number: str
     cvv: int | None
     exp_date: date
-
-    class Config:
-        orm_mode = True
