@@ -17,8 +17,9 @@ class CreditCardBase(BaseModel):
 
     @field_validator("exp_date")
     def check_date(exp_date: str):
-        e_date = datetime.strptime(exp_date, "%m/%Y")
-        if (e_date < datetime.today()):
+        current_date = datetime.today().date().replace(day=1)
+        e_date = datetime.strptime(exp_date, "%m/%Y").date()
+        if (e_date < current_date):
             raise ValueError("The given date must be greater than today")
         last_day = calendar.monthrange(e_date.year, e_date.month)[1]
         e_date = e_date.replace(day=last_day)
