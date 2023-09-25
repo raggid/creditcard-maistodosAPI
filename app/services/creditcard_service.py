@@ -30,6 +30,7 @@ class CreditcardService():
                                 detail="Creditcard not found")
         db.delete(card)
         db.commit()
+        return card
 
 
 creditcard_service = CreditcardService()
