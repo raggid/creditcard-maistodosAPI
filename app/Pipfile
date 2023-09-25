@@ -17,6 +17,8 @@ pydantic-settings = "*"
 tenacity = "*"
 
 [dev-packages]
+pytest = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.11"
