@@ -8,7 +8,7 @@ from services.creditcard_service import creditcard_service
 
 router = APIRouter(
     prefix="/credit-card",
-    tags=["credit-cards"])
+    tags=["Credit Cards"])
 
 
 @router.get("/", response_model=List[CreditCardDB])

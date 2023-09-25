@@ -11,10 +11,10 @@ from services.user_service import user_service
 from core.config import settings
 from core import security
 
-router = APIRouter()
+router = APIRouter(prefix="/login", tags=["Login"])
 
 
-@router.post("/login/access-token", response_model=schemas.Token)
+@router.post("/access-token", response_model=schemas.Token)
 def login_access_token(
     db: Session = Depends(get_database), form_data: OAuth2PasswordRequestForm = Depends()
 ) -> Any:
